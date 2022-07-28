@@ -4,6 +4,7 @@ import { AsyncStorage } from 'react-native';
 const FavoriteContext = createContext();
 
 function FavoriteContextProvider({ children }) {
+  // Ids of favorite assets are stored in this array
   const [favorites, setFavorites] = useState([]);
 
   const addFavorite = (favorite) => {

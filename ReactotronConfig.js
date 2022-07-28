@@ -6,4 +6,12 @@ Reactotron.setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either com
   .useReactNative() // add all built-in react native plugins
   .connect(); // let's connect!
 
+console.tron = (value) => Reactotron.log(value);
+/*console.tron = (name, value) =>
+  Reactotron.display({
+    name: name,
+    value: value,
+    preview: name,
+    important: true,
+  });*/
 Reactotron.clear();

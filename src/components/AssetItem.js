@@ -8,7 +8,7 @@ const FavButton = ({ fullIcon, onPress }) => {
       <View>
         <Icon
           name={fullIcon ? 'heart' : 'heart-outline'}
-          color="red"
+          color="tomato"
           size={30}
           style={{ width: 50 }}
         ></Icon>

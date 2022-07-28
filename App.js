@@ -28,6 +28,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 const HomeStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const queryClient = new QueryClient();
@@ -46,7 +48,23 @@ const App: () => Node = () => {
     <QueryClientProvider client={queryClient}>
       <FavoriteContextProvider>
         <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+                if (route.name === 'Home') {
+                  iconName = focused ? 'home' : 'home-outline';
+                } else if (route.name === 'Favorites') {
+                  iconName = focused ? 'heart' : 'heart-outline';
+                }
+
+                // You can return any component that you like here!
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+              tabBarActiveTintColor: 'tomato',
+              tabBarInactiveTintColor: 'gray',
+            })}
+          >
             <Tab.Screen name="Home" component={AssetsStackScreen} />
             <Tab.Screen name="Favorites" component={FavoriteScreen} />
           </Tab.Navigator>

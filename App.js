@@ -13,6 +13,8 @@ import { SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View } from 
 import AssetsScreen from './src/screens/AssetsScreen';
 import SingleAssetScreen from './src/screens/SingleAssetScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { FavoriteContextProvider } from './src/contexts/FavoriteContext';
 
 import {
   Colors,
@@ -27,6 +29,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const HomeStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const queryClient = new QueryClient();
 
 function AssetsStackScreen() {
   return (
@@ -37,16 +41,18 @@ function AssetsStackScreen() {
   );
 }
 
-const Tab = createBottomTabNavigator();
-
 const App: () => Node = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={AssetsStackScreen} />
-        <Tab.Screen name="Favorites" component={FavoriteScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <FavoriteContextProvider>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={AssetsStackScreen} />
+            <Tab.Screen name="Favorites" component={FavoriteScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </FavoriteContextProvider>
+    </QueryClientProvider>
   );
 };
 

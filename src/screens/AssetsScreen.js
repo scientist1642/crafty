@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, StatusBar, Button, FlatList } from 'react-native';
-import Reactotron from 'reactotron-react-native';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useFavorites } from '../hooks/favorites';
 import AssetItem from '../components/AssetItem';
 
 const fetchAssets = async ({ pageParam = 1 }) => {
@@ -35,23 +33,17 @@ function AssetsScreen({ navigation }) {
       },
     }
   );
-  const { favorites, toggleFavorite } = useFavorites();
   const loadMore = () => {
     if (hasNextPage) {
       fetchNextPage();
     }
   };
-  const renderItem = ({ item }) => (
-    <AssetItem
-      asset={item}
-      isFavorite={favorites.includes(item.id)}
-      onFavoritePress={() => toggleFavorite(item.id)}
-    />
-  );
+  const renderItem = ({ item }) => <AssetItem asset={item} />;
 
   if (status == 'loading') return <Text>Loading...</Text>;
   if (status == 'error') return <Text>{error}</Text>;
 
+  console.log(data);
   return (
     <View style={{ flex: 1 }}>
       <Text>Assets Screen</Text>

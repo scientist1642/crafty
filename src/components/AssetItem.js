@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useFavorites } from '../hooks/favorites';
-
 import Icon from 'react-native-vector-icons/Ionicons';
+
 const FavoriteButton = ({ fullIcon, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress}>
@@ -26,8 +26,10 @@ function AssetItem({ asset }) {
   return (
     <View style={styles.assetItem}>
       <View style={{ flex: 2 }}>
-        <Text style={{ fontWeight: 'bold' }}>{asset.symbol}</Text>
-        <Text>{asset.slug}</Text>
+        <View>
+          <Text style={{ fontWeight: 'bold' }}>{asset.symbol}</Text>
+          <Text>{asset.slug}</Text>
+        </View>
       </View>
       <View style={{ flex: 1, alignItems: 'flex-end' }}>
         <FavoriteButton onPress={onFavoritePress} fullIcon={isFavorite} />

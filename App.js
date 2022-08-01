@@ -13,7 +13,8 @@ import { SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View } from 
 import AssetsScreen from './src/screens/AssetsScreen';
 import SingleAssetScreen from './src/screens/SingleAssetScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './src/config';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { FavoriteContextProvider } from './src/contexts/FavoriteContext';
 
 import {
@@ -32,7 +33,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomeStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-const queryClient = new QueryClient();
 
 function AssetsStackScreen() {
   return (

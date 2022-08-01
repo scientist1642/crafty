@@ -3,18 +3,12 @@ import { Text, View, SafeAreaView, StatusBar, Button, FlatList } from 'react-nat
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import AssetItem from '../components/AssetItem';
+import { fetchOptions } from '../utils/api';
 
 const fetchAssets = async ({ pageParam = 1 }) => {
   url = `https://data.messari.io/api/v2/assets?limit=20&page=${pageParam}&fields=id,slug,symbol,metrics/market_data/price_usd`;
-  // TODO move api key to .env file
-  const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      'x-messari-api-key': 'a7004d4f-23a9-4da7-8ae7-e80bd3f59a6f',
-    },
-  });
+  const response = await fetch(url, fetchOptions);
   const data = await response.json();
-  //console.tron(JSON.stringify(pageParam));
   if ('data' in data) return { data: data['data'], pageParam };
   // TODO make sure that the reason we didn't get data is because we reached the end of the pages
   // and not because of some other error
@@ -43,7 +37,6 @@ function AssetsScreen({ navigation }) {
   if (status == 'loading') return <Text>Loading...</Text>;
   if (status == 'error') return <Text>{error}</Text>;
 
-  console.log(data);
   return (
     <View style={{ flex: 1 }}>
       <Text>Assets Screen</Text>

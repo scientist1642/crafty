@@ -13,16 +13,7 @@ const fetchAsset = async (assetId) => {
 };
 
 function FavoriteAssetItem({ assetId }) {
-  const { data, error, status } = useQuery(['asset', assetId], () => fetchAsset(assetId), {
-    initialData: () => {
-      const cachedData = queryClient
-        .getQueryData(['assets'])
-        .pages.map((x) => x['data'])
-        .flat()
-        ?.find((item) => item.id === assetId);
-      return { data: cachedData };
-    },
-  });
+  const { data, error, status } = useQuery(['asset', assetId], () => fetchAsset(assetId));
 
   if (status == 'loading') return <Text>Loading...</Text>;
   if (status == 'error') return <Text>{error}</Text>;

@@ -4,6 +4,7 @@ import { Text, View, SafeAreaView, StatusBar, Button, FlatList } from 'react-nat
 import { useInfiniteQuery } from '@tanstack/react-query';
 import AssetItem from '../components/AssetItem';
 import { fetchOptions } from '../utils/api';
+import { queryClient } from '../config';
 
 const fetchAssets = async ({ pageParam = 1 }) => {
   url = `https://data.messari.io/api/v2/assets?limit=20&page=${pageParam}&fields=id,slug,symbol,metrics/market_data/price_usd`;
@@ -24,6 +25,12 @@ function AssetsScreen({ navigation }) {
         if (lastPage.pageParam != -1)
           //End of pages not reached
           return lastPage.pageParam + 1;
+      },
+      onSuccess: (data) => {
+        data.pages.at(-1).data.forEach((asset) => {
+          //Todo maybe better to use setQueriesData
+          queryClient.setQueryData(['asset', asset.id], { data: asset });
+        });
       },
     }
   );

@@ -5,11 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 
 function SingleAssetScreen({ route }) {
   const { asset } = route.params;
-  const { data, error, status } = useQuery(['market', asset.slug], () =>
-    fetchPriceHistory(asset.slug)
+  const { data, error, status } = useQuery(['market', asset.symbol], () =>
+    fetchPriceHistory(asset.symbol)
   );
   if (status == 'loading') return <Text>Loading...</Text>;
   if (status == 'error') return <Text>{error}</Text>;
+  console.log(data);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

@@ -26,8 +26,8 @@ const fetchAssets = async ({ pageParam = 1 }) => {
   else return { data: [], pageParam: -1 }; //-1 indicates end of pages
 };
 
-const fetchPriceHistory = async (assetSlug) => {
-  url = `https://data.messari.io/api/v1/markets/binance-${assetSlug}-usdt/metrics/price-usd/time-series?interval=15m`;
+const fetchPriceHistory = async (assetSymbol) => {
+  url = `https://data.messari.io/api/v1/markets/binance-${assetSymbol}-usdt/metrics/price-usd/time-series?interval=15m`;
   const response = await fetch(url, fetchOptions);
   return response.json();
 };

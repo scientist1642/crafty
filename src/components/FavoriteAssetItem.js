@@ -4,13 +4,7 @@ import { View, Text } from 'react-native';
 import { fetchOptions } from '../utils/api';
 import AssetItem from './AssetItem';
 import { queryClient } from '../config';
-
-const fetchAsset = async (assetId) => {
-  const url = `https://data.messari.io/api/v1/assets/${assetId}`;
-  console.log(url);
-  const response = await fetch(url, fetchOptions);
-  return response.json();
-};
+import { fetchAsset } from '../utils/api';
 
 function FavoriteAssetItem({ assetId }) {
   const { data, error, status } = useQuery(['asset', assetId], () => fetchAsset(assetId));

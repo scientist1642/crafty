@@ -13,7 +13,7 @@ function FavoriteAssetItem({ assetId }) {
   if (status == 'error') return <Text>{error}</Text>;
 
   const { id, symbol, slug } = data['data'];
-  const asset = { id, symbol, name };
+  const asset = { id, symbol, slug };
   return <AssetItem asset={asset} />;
 }
 

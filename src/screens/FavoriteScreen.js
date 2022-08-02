@@ -3,7 +3,11 @@ import { Text, View, SafeAreaView, StatusBar } from 'react-native';
 import FavoriteAssetsList from '../components/FavoriteAssetsList';
 
 function FavoriteScreen() {
-  return <FavoriteAssetsList />;
+  return (
+    <SafeAreaView>
+      <FavoriteAssetsList />
+    </SafeAreaView>
+  );
 }
 
 export default FavoriteScreen;

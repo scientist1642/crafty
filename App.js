@@ -38,7 +38,27 @@ function AssetsStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Assets" component={AssetsScreen} options={{ headerShown: false }} />
-      <HomeStack.Screen name="SingleAsset" component={SingleAssetScreen} />
+      <HomeStack.Screen
+        name="SingleAsset"
+        component={SingleAssetScreen}
+        options={{ title: 'Price History' }}
+      />
+    </HomeStack.Navigator>
+  );
+}
+function FavoriteStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Favorites"
+        component={FavoriteScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen
+        name="SingleAsset"
+        component={SingleAssetScreen}
+        options={{ title: 'Price History' }}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -52,9 +72,9 @@ const App: () => Node = () => {
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
-                if (route.name === 'Home') {
+                if (route.name === 'HomeTab') {
                   iconName = focused ? 'home' : 'home-outline';
-                } else if (route.name === 'Favorites') {
+                } else if (route.name === 'FavoriteTab') {
                   iconName = focused ? 'heart' : 'heart-outline';
                 }
 
@@ -63,10 +83,20 @@ const App: () => Node = () => {
               },
               tabBarActiveTintColor: 'tomato',
               tabBarInactiveTintColor: 'gray',
+              headerShown: false,
             })}
           >
-            <Tab.Screen name="Home" component={AssetsStackScreen} />
-            <Tab.Screen name="Favorites" component={FavoriteScreen} />
+            <Tab.Screen
+              name="HomeTab"
+              tabBarLabel="Home"
+              component={AssetsStackScreen}
+              options={{ title: 'Home' }}
+            />
+            <Tab.Screen
+              name="FavoriteTab"
+              component={FavoriteStackScreen}
+              options={{ title: 'Favorite' }}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       </FavoriteContextProvider>

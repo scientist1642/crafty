@@ -8,10 +8,13 @@ const fetchOptions = {
 };
 
 const fetchAsset = async (assetId) => {
-  const url = `https://data.messari.io/api/v1/assets/${assetId}`;
-  console.log(url);
-  const response = await fetch(url, fetchOptions);
-  return response.json();
+  try {
+    const url = `https://data.messari.io/api/v1/assets/${assetId}`;
+    const response = await fetch(url, fetchOptions);
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
 };
 const fetchAssets = async ({ pageParam = 1 }) => {
   url = `https://data.messari.io/api/v2/assets?limit=20&page=${pageParam}&fields=id,slug,symbol,metrics/market_data/price_usd`;
@@ -23,4 +26,10 @@ const fetchAssets = async ({ pageParam = 1 }) => {
   else return { data: [], pageParam: -1 }; //-1 indicates end of pages
 };
 
-export { fetchOptions, fetchAsset, fetchAssets };
+const fetchPriceHistory = async (assetSlug) => {
+  url = `https://data.messari.io/api/v1/markets/binance-${assetSlug}-usdt/metrics/price-usd/time-series?interval=15m`;
+  const response = await fetch(url, fetchOptions);
+  return response.json();
+};
+
+export { fetchOptions, fetchAsset, fetchAssets, fetchPriceHistory };

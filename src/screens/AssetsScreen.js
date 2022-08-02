@@ -35,8 +35,7 @@ function AssetsScreen({ navigation }) {
   if (status == 'error') return <Text>{error}</Text>;
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text>Assets Screen</Text>
+    <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={data.pages.map((x) => x['data']).flat()}
         keyExtractor={(item) => item.id}
@@ -44,8 +43,7 @@ function AssetsScreen({ navigation }) {
         renderItem={renderItem}
         ListFooterComponent={isFetchingNextPage ? <Text>Fetching Next Page</Text> : null}
       />
-      <Button title="Go to Asset" onPress={() => navigation.navigate('SingleAsset')} />
-    </View>
+    </SafeAreaView>
   );
 }
 

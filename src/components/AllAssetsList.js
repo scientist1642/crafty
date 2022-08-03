@@ -32,7 +32,7 @@ function AllAssetsList({ navigation }) {
   };
   const renderItem = ({ item }) => <AssetItem asset={item} />;
 
-  if (status == 'loading') return <Text>Loading...</Text>;
+  if (status == 'loading') return <Spinner fullScreen />;
   if (status == 'error') return <Text>{error}</Text>;
   return (
     <FlatList

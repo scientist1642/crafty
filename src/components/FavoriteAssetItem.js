@@ -5,12 +5,13 @@ import { fetchOptions } from '../utils/api';
 import AssetItem from './AssetItem';
 import { queryClient } from '../config';
 import { fetchAsset } from '../utils/api';
+import Spinner from './Spinner';
 
 function FavoriteAssetItem({ assetId }) {
   const { data, error, status } = useQuery(['assets', assetId], () => fetchAsset(assetId), {
     staleTime: Infinity,
   });
-  if (status == 'loading') return <Text>Loading...</Text>;
+  if (status == 'loading') return <Spinner />;
   if (status == 'error') return <Text>{error}</Text>;
 
   const asset = data['data'];

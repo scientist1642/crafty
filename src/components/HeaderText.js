@@ -8,6 +8,7 @@ function HeaderText(props) {
 const style = StyleSheet.create({
   fontWeight: 'bold',
   fontSize: 30,
+  marginBottom: 10,
   textAlign: 'center',
 });
 

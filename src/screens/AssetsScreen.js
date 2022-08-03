@@ -6,6 +6,8 @@ import AssetItem from '../components/AssetItem';
 import { queryClient } from '../config';
 import { fetchAssets } from '../utils/api';
 import { ScrollView } from 'react-native-gesture-handler';
+import Spinner from '../components/Spinner';
+import HeaderText from '../components/HeaderText';
 
 function AssetsScreen({ navigation }) {
   const { data, error, status, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
@@ -37,12 +39,16 @@ function AssetsScreen({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <HeaderText>Listed Coins</HeaderText>
       <FlatList
         data={data.pages.map((x) => x['data']).flat()}
         keyExtractor={(item) => item.id}
         onEndReached={loadMore}
         renderItem={renderItem}
-        ListFooterComponent={isFetchingNextPage ? <Text>Fetching Next Page</Text> : null}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={
+          isFetchingNextPage ? <Spinner size="small" style={{ margin: 10 }} /> : null
+        }
       />
     </SafeAreaView>
   );

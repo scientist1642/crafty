@@ -11,6 +11,7 @@ import {
 import { fetchPriceHistory } from '../utils/api';
 import { useQuery } from '@tanstack/react-query';
 import { LineChart } from 'react-native-charts-wrapper';
+import Spinner from '../components/Spinner';
 
 function SingleAssetScreen({ route }) {
   const { asset } = route.params;
@@ -20,7 +21,7 @@ function SingleAssetScreen({ route }) {
   );
   const [selectedPoint, updateSelectedPoint] = React.useState(null);
 
-  if (status == 'loading') return <Text>Loading...</Text>;
+  if (status == 'loading') return <Spinner />;
   if (status == 'error') return <Text>{error}</Text>;
 
   /*const chartData = data['data'].values.slice(-96).map((value) => {

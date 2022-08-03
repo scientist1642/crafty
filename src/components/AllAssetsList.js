@@ -12,6 +12,7 @@ import HeaderText from './HeaderText';
 function AllAssetsList({ navigation }) {
   const { data, error, status, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
     useInfiniteQuery(['assets', 'all'], fetchAssets, {
+      staleTime: Infinity,
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.pageParam != -1)
           //End of pages not reached
@@ -33,7 +34,6 @@ function AllAssetsList({ navigation }) {
 
   if (status == 'loading') return <Text>Loading...</Text>;
   if (status == 'error') return <Text>{error}</Text>;
-
   return (
     <FlatList
       data={data.pages.map((x) => x['data']).flat()}

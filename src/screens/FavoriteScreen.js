@@ -5,7 +5,7 @@ import HeaderText from '../components/HeaderText';
 
 function FavoriteScreen() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <HeaderText>Favorite Coins</HeaderText>
       <FavoriteAssetsList />
     </SafeAreaView>

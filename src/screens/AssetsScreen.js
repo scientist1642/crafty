@@ -39,7 +39,7 @@ function AssetsScreen({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <HeaderText>Listed Coins</HeaderText>
+      <HeaderText>All Coins</HeaderText>
       <FlatList
         data={data.pages.map((x) => x['data']).flat()}
         keyExtractor={(item) => item.id}

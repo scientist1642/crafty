@@ -7,31 +7,11 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { useFavorites } from '../hooks/favorites';
 import { useNavigation } from '@react-navigation/native';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-
-const FavoriteButton = ({ fullIcon, onPress }) => {
-  return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View>
-        <Icon
-          name={fullIcon ? 'heart' : 'heart-outline'}
-          color="tomato"
-          size={30}
-          style={styles.favoriteButton}
-        ></Icon>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
+import FavoriteButton from './FavoriteButton';
 
 function AssetItem({ asset }) {
-  const { favorites, toggleFavorite } = useFavorites();
   const navigation = useNavigation();
-  const isFavorite = favorites.includes(asset.id);
-  const onFavoritePress = () => toggleFavorite(asset.id);
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate('SingleAsset', { asset })}>
@@ -48,7 +28,7 @@ function AssetItem({ asset }) {
           </View>
         </View>
         <View style={{ flex: 1, alignItems: 'flex-end' }}>
-          <FavoriteButton onPress={onFavoritePress} fullIcon={isFavorite} />
+          <FavoriteButton assetId={asset.id} />
         </View>
       </View>
     </TouchableOpacity>
@@ -56,9 +36,6 @@ function AssetItem({ asset }) {
 }
 
 const styles = StyleSheet.create({
-  favoriteButton: {
-    width: 50,
-  },
   assetItem: {
     height: 80,
     flex: 1,

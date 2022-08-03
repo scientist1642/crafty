@@ -41,7 +41,7 @@ function AssetsStackScreen() {
       <HomeStack.Screen
         name="SingleAsset"
         component={SingleAssetScreen}
-        options={{ title: 'Price History' }}
+        options={({ route }) => ({ title: route.params.asset.name })}
       />
     </HomeStack.Navigator>
   );
@@ -57,7 +57,7 @@ function FavoriteStackScreen() {
       <HomeStack.Screen
         name="SingleAsset"
         component={SingleAssetScreen}
-        options={{ title: 'Price History' }}
+        options={({ route }) => ({ title: route.params.asset.name })}
       />
     </HomeStack.Navigator>
   );

@@ -18,10 +18,9 @@ function AssetItem({ asset }) {
       <View style={styles.assetItem}>
         <View style={{ flex: 2 }}>
           <View>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontWeight: 'bold' }}>{asset.name}</Text>
-              <Text style={{ color: 'gray' }}>{'  ' + asset.symbol}</Text>
-            </View>
+            <Text style={{ fontWeight: 'bold' }}>
+              {asset.name} <Text style={{ color: 'gray' }}>{asset.symbol}</Text>
+            </Text>
             <Text style={{ marginTop: 4, color: 'gray' }}>
               ${asset.metrics.market_data.price_usd.toFixed(5)}
             </Text>

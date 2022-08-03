@@ -25,13 +25,17 @@ function FavoriteContextProvider({ children }) {
   };
 
   useEffect(() => {
-    AsyncStorage.getItem('Crafty.Favorites').then((value) => {
-      if (value) setFavorites(JSON.parse(value));
-    });
+    AsyncStorage.getItem('Crafty.Favorites')
+      .then((value) => {
+        if (value) setFavorites(JSON.parse(value));
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    AsyncStorage.setItem('Crafty.Favorites', JSON.stringify(favorites));
+    AsyncStorage.setItem('Crafty.Favorites', JSON.stringify(favorites)).catch((err) =>
+      console.log(err)
+    );
   }, [favorites]);
 
   return (

@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-import './wdyr';
+
 import React from 'react';
 import type { Node } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';

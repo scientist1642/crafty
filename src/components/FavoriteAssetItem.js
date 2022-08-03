@@ -7,7 +7,7 @@ import { queryClient } from '../config';
 import { fetchAsset } from '../utils/api';
 
 function FavoriteAssetItem({ assetId }) {
-  const { data, error, status } = useQuery(['asset', assetId], () => fetchAsset(assetId));
+  const { data, error, status } = useQuery(['assets', assetId], () => fetchAsset(assetId));
 
   if (status == 'loading') return <Text>Loading...</Text>;
   if (status == 'error') return <Text>{error}</Text>;

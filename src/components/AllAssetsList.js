@@ -10,10 +10,8 @@ import Spinner from './Spinner';
 import HeaderText from './HeaderText';
 
 function AllAssetsList({ navigation }) {
-  const { data, error, status, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-    ['assets'],
-    fetchAssets,
-    {
+  const { data, error, status, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
+    useInfiniteQuery(['assets', 'all'], fetchAssets, {
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.pageParam != -1)
           //End of pages not reached
@@ -22,11 +20,10 @@ function AllAssetsList({ navigation }) {
       onSuccess: (data) => {
         data.pages[data.pages.length - 1].data.forEach((asset) => {
           //Todo maybe better to use setQueriesData
-          queryClient.setQueryData(['asset', asset.id], { data: asset });
+          queryClient.setQueryData(['assets', asset.id], { data: asset });
         });
       },
-    }
-  );
+    });
   const loadMore = () => {
     if (hasNextPage) {
       fetchNextPage();
@@ -44,6 +41,8 @@ function AllAssetsList({ navigation }) {
       onEndReached={loadMore}
       renderItem={renderItem}
       onEndReachedThreshold={0.5}
+      refreshing={isFetching}
+      onRefresh={() => queryClient.invalidateQueries(['assets'])}
       ListFooterComponent={
         isFetchingNextPage ? <Spinner size="small" style={{ margin: 10 }} /> : null
       }

@@ -5,7 +5,6 @@ import FavoriteAssetItem from './FavoriteAssetItem';
 
 function FavoriteAssetsList() {
   const { favorites } = useFavorites();
-  console.log(favorites.length == 0);
   if (favorites.length == 0) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

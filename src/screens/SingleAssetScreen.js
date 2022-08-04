@@ -15,9 +15,26 @@ import Spinner from '../components/Spinner';
 import FavoriteButton from '../components/FavoriteButton';
 import ErrorBox from '../components/ErrorBox';
 
-const printableDate = (time) => {
-  return new Date(time).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
-};
+function printableDate(timestamp) {
+  const date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) hours = '0' + hours;
+  let minutes = date.getMinutes();
+  if (minutes < 10) minutes = '0' + minutes;
+  let timeOfDay = hours < 12 ? 'AM' : 'PM';
+
+  return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}, ${hours}:${minutes} ${timeOfDay}`;
+}
+
+/*const printableDate = (time) => {
+  return new Date(time).toLocaleString('en-us', {
+    day: 'numeric',
+    year: 'numeric',
+    month: 'numeric',
+    dateStyle: 'short',
+    timeStyle: 'short',
+  });
+};*/
 
 function SingleAssetScreen({ route }) {
   const { asset } = route.params;

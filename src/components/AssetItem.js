@@ -18,7 +18,7 @@ function AssetItem({ asset }) {
       <View style={styles.assetItem}>
         <View style={{ flex: 2 }}>
           <View>
-            <Text style={{ fontWeight: 'bold' }}>
+            <Text style={{ fontWeight: 'bold', color: 'black' }}>
               {asset.name} <Text style={{ color: 'gray' }}>{asset.symbol}</Text>
             </Text>
             <Text style={{ marginTop: 4, color: 'gray' }}>

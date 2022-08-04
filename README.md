@@ -13,8 +13,7 @@ There are some things to spend more time on:
 
 ## Used Libraries
 
-Since the scope of the app is rather limited, we could get away without using some of those libraries listed,
-But since they are quite useful in larger apps, It was worth to refresh the installation process.
+Since the scope of the app is rather limited, we could get away without using some of those libraries listed. But they are quite useful in larger apps, and it was worth to refresh the installation process.
 
 - `react-native-vector-icons`
 - `react-navigation`

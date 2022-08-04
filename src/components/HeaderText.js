@@ -10,6 +10,7 @@ const style = StyleSheet.create({
   fontSize: 30,
   marginBottom: 10,
   textAlign: 'center',
+  color: 'black',
 });
 
 export default HeaderText;

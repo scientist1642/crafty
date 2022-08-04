@@ -1,5 +1,7 @@
 ## General
 
+[Video demo](https://www.youtube.com/watch?v=aNg5kDxL6mU)
+
 The app is scaffolded using create `Create React Native App` and can be run
 by the command `npx react-native run-ios/android`
 
@@ -19,3 +21,7 @@ Since the scope of the app is rather limited, we could get away without using so
 - `react-navigation`
 - `react-native-charts-wrapper` tried `coinjar/react-native-wagmi-charts` and considered `victory`
   but `charts-wrapper` seems to be faster and functional for our purposes.
+
+![1](https://i.ibb.co/dJBKTZm/1.png)
+![2](https://i.ibb.co/fvck9sH/2.png)
+![3](https://i.ibb.co/7RRQFz0/3.png)

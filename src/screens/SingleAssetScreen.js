@@ -77,6 +77,7 @@ function SingleAssetScreen({ route }) {
           xAxis={{
             gridLineWidth: 0,
             labelCount: 5,
+            drawGridLines: false,
             avoidFirstLastClipping: true,
             granularity: 1,
             granularityEnabled: true,

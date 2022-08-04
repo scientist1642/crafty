@@ -17,8 +17,9 @@ There are some things to spend more time on:
 
 Optimizations haven't been applied yet. We can if we want though:
 
-- Use a hashset instead of a list to keep favorite asset ids
 - Use React.memo and `usecallback`
+- Replace flatlist with Bidirectional infinite scroll
+- Use a hashset instead of a list to keep favorite asset ids
 
 ## Used Libraries
 

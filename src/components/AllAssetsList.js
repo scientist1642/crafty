@@ -28,6 +28,7 @@ function AllAssetsList({ navigation }) {
       if (lastPage.pageParam != -1)
         //End of pages not reached
         return lastPage.pageParam + 1;
+      else return undefined;
     },
     onSuccess: (data) => {
       data.pages[data.pages.length - 1].data.forEach((asset) => {

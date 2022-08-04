@@ -8,6 +8,9 @@ import { fetchAssets } from '../utils/api';
 import { ScrollView } from 'react-native-gesture-handler';
 import Spinner from './Spinner';
 import HeaderText from './HeaderText';
+import ErrorBox from './ErrorBox';
+
+const renderItem = ({ item }) => <AssetItem asset={item} />;
 
 function AllAssetsList({ navigation }) {
   const { data, error, status, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
@@ -30,10 +33,9 @@ function AllAssetsList({ navigation }) {
       fetchNextPage();
     }
   };
-  const renderItem = ({ item }) => <AssetItem asset={item} />;
 
   if (status == 'loading') return <Spinner fullScreen />;
-  if (status == 'error') return <Text>{error}</Text>;
+  if (status == 'error') return <ErrorBox error={error} />;
   return (
     <FlatList
       data={data.pages.map((x) => x['data']).flat()}

@@ -6,13 +6,14 @@ import AssetItem from './AssetItem';
 import { queryClient } from '../config';
 import { fetchAsset } from '../utils/api';
 import Spinner from './Spinner';
+import ErrorBox from './ErrorBox';
 
 function FavoriteAssetItem({ assetId }) {
   const { data, error, status } = useQuery(['assets', assetId], () => fetchAsset(assetId), {
     staleTime: Infinity,
   });
   if (status == 'loading') return <Spinner />;
-  if (status == 'error') return <Text>{error}</Text>;
+  if (status == 'error') return <ErrorBox error={error} />;
 
   const asset = data['data'];
   // Quick hack to standartize price property  for assetItem.

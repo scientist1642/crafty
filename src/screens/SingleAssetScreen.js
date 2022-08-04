@@ -13,6 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import { LineChart } from 'react-native-charts-wrapper';
 import Spinner from '../components/Spinner';
 import FavoriteButton from '../components/FavoriteButton';
+import ErrorBox from '../components/ErrorBox';
 
 const printableDate = (time) => {
   return new Date(time).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
@@ -32,7 +33,7 @@ function SingleAssetScreen({ route }) {
   });
 
   if (status == 'loading') return <Spinner />;
-  if (status == 'error') return <Text>{error}</Text>;
+  if (status == 'error') return <ErrorBox error={error} />;
 
   /*const chartData = data['data'].values.slice(-96).map((value) => {
     const [timestamp, open, high, low, close, _] = value;

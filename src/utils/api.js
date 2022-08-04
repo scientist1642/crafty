@@ -1,8 +1,7 @@
-// Default fetch optiosn
 // Todo move the key to .env file
+// TODO handle error better / rate limits etc etc
 
-// TODO handle errors / rate limits etc etc
-
+// Default fetch options
 const fetchOptions = {
   headers: {
     'Content-Type': 'application/json',
@@ -10,11 +9,27 @@ const fetchOptions = {
   },
 };
 
-const fetchAsset = async (assetId) => {
+const fetchUrl = async (url) => {
   try {
-    const url = `https://data.messari.io/api/v1/assets/${assetId}/metrics?fields=id,slug,symbol,name,market_data/price_usd`;
     const response = await fetch(url, fetchOptions);
-    const data = await response.json();
+    const isJson = response.headers.get('content-type')?.includes('application/json');
+    const data = isJson ? await response.json() : null;
+    if (!response.ok) {
+      const error = data?.status?.error_message || response.status;
+      throw Error(error);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    if (error.message.startsWith('Market with key') && error.message.endsWith('not found'))
+      throw Error('Sorry this currency Pair was not found on Binance Market');
+    else throw Error(error);
+  }
+};
+
+const fetchAsset = async (assetId) => {
+  const url = `https://data.messari.io/api/v1/assets/${assetId}/metrics?fields=id,slug,symbol,name,market_data/price_usd`;
+  return await fetchUrl(url).then((data) => {
     const asset = data['data'];
     // Quick hack to standartize price property  for assetItem.
     // Asset object has following schema {id, symbol, name, metrics:{market_data:{price_usd}}}
@@ -22,28 +37,22 @@ const fetchAsset = async (assetId) => {
     // so we adding it here to be consistent
     asset['metrics'] = { market_data: asset.market_data };
     return data;
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
+
 const fetchAssets = async ({ pageParam = 1 }) => {
-  try {
-    url = `https://data.messari.io/api/v2/assets?limit=20&page=${pageParam}&fields=id,slug,symbol,name,metrics/market_data/price_usd`;
-    const response = await fetch(url, fetchOptions);
-    const data = await response.json();
+  const url = `https://data.messari.io/api/v2/assets?limit=20&page=${pageParam}&fields=id,slug,symbol,name,metrics/market_data/price_usd`;
+  return await fetchUrl(url).then((data) => {
     if ('data' in data) return { data: data['data'], pageParam };
     // TODO make sure that the reason we didn't get data is because we reached the end of the pages
     // and not because of some other error
     else return { data: [], pageParam: -1 }; //-1 indicates end of pages
-  } catch (error) {
-    console.log(error);
-  }
+  });
 };
 
 const fetchPriceHistory = async (assetSymbol) => {
-  url = `https://data.messari.io/api/v1/markets/binance-${assetSymbol}-usdt/metrics/price-usd/time-series?interval=15m`;
-  const response = await fetch(url, fetchOptions);
-  return await response.json();
+  const url = `https://data.messari.io/api/v1/markets/binance-${assetSymbol}-usdt/metrics/price-usd/time-series?interval=15m`;
+  return await fetchUrl(url);
 };
 
 export { fetchOptions, fetchAsset, fetchAssets, fetchPriceHistory };

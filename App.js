@@ -6,6 +6,8 @@
  * @flow strict-local
  */
 
+// Todo navigation can be moved out to a separate file for cleaner App.js
+
 import React from 'react';
 import type { Node } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
@@ -16,14 +18,6 @@ import FavoriteScreen from './src/screens/FavoriteScreen';
 import { queryClient } from './src/config';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { FavoriteContextProvider } from './src/contexts/FavoriteContext';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

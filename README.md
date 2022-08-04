@@ -10,6 +10,7 @@ by the command `npx react-native run-ios/android`
 There are some things to spend more time on:
 
 - Proper testing and some edge cases
+- It seems that messari has a bug and occesionally can return the same asset in different pages.
 - Better error handling and custom error messages: currently almost all error messages are logged directly for debugging purposes.
 - Asset price history comes from messari api's Binance market, it's `$currency-USDT` pair since I couldn't find `$currency-usd` pairs at the time and did't spend more time on it.
 

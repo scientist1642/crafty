@@ -43,7 +43,7 @@ const fetchAsset = async (assetId) => {
 const fetchAssets = async ({ pageParam = 1 }) => {
   const url = `https://data.messari.io/api/v2/assets?limit=20&page=${pageParam}&fields=id,slug,symbol,name,metrics/market_data/price_usd`;
   return await fetchUrl(url).then((data) => {
-    if ('data' in data) return { data: data['data'], pageParam };
+    if (data?.data?.length > 0) return { data: data['data'], pageParam };
     // TODO make sure that the reason we didn't get data is because we reached the end of the pages
     // and not because of some other error
     else return { data: [], pageParam: -1 }; //-1 indicates end of pages

@@ -42,7 +42,6 @@ function AllAssetsList({ navigation }) {
       fetchNextPage();
     }
   };
-  console.log(status);
 
   if (status == 'loading') return <Spinner fullScreen />;
   if (status == 'error' && !isFetching) return <ErrorBox error={error} onRetry={refetch} />;

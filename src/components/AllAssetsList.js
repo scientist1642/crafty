@@ -13,29 +13,38 @@ import ErrorBox from './ErrorBox';
 const renderItem = ({ item }) => <AssetItem asset={item} />;
 
 function AllAssetsList({ navigation }) {
-  const { data, error, status, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteQuery(['assets', 'all'], fetchAssets, {
-      staleTime: Infinity,
-      getNextPageParam: (lastPage, pages) => {
-        if (lastPage.pageParam != -1)
-          //End of pages not reached
-          return lastPage.pageParam + 1;
-      },
-      onSuccess: (data) => {
-        data.pages[data.pages.length - 1].data.forEach((asset) => {
-          //Todo maybe better to use setQueriesData
-          queryClient.setQueryData(['assets', asset.id], { data: asset });
-        });
-      },
-    });
+  const {
+    data,
+    error,
+    status,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    isFetching,
+    refetch,
+  } = useInfiniteQuery(['assets', 'all'], fetchAssets, {
+    staleTime: Infinity,
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.pageParam != -1)
+        //End of pages not reached
+        return lastPage.pageParam + 1;
+    },
+    onSuccess: (data) => {
+      data.pages[data.pages.length - 1].data.forEach((asset) => {
+        //Todo maybe better to use setQueriesData
+        queryClient.setQueryData(['assets', asset.id], { data: asset });
+      });
+    },
+  });
   const loadMore = () => {
     if (hasNextPage) {
       fetchNextPage();
     }
   };
+  console.log(status);
 
   if (status == 'loading') return <Spinner fullScreen />;
-  if (status == 'error') return <ErrorBox error={error} />;
+  if (status == 'error' && !isFetching) return <ErrorBox error={error} onRetry={refetch} />;
   return (
     <FlatList
       data={data.pages.map((x) => x['data']).flat()}

@@ -39,10 +39,9 @@ function printableDate(timestamp) {
 function SingleAssetScreen({ route }) {
   const { asset } = route.params;
   const { height, width } = useWindowDimensions();
-  const { data, error, status } = useQuery(['market', asset.symbol], () =>
+  const { data, error, status, refetch } = useQuery(['market', asset.symbol], () =>
     fetchPriceHistory(asset.symbol)
   );
-  console.log(data);
   const [selectedPoint, updateSelectedPoint] = React.useState(null);
   const [priceData, setPriceData] = React.useState({
     open: asset.metrics.market_data.price_usd,
@@ -50,7 +49,7 @@ function SingleAssetScreen({ route }) {
   });
 
   if (status == 'loading') return <Spinner />;
-  if (status == 'error') return <ErrorBox error={error} />;
+  if (status == 'error') return <ErrorBox error={error} onRetry={refetch} />;
 
   /*const chartData = data['data'].values.slice(-96).map((value) => {
     const [timestamp, open, high, low, close, _] = value;

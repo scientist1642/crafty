@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import AllAssetsList from '../components/AllAssetsList';
 import HeaderText from '../components/HeaderText';

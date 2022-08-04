@@ -22,6 +22,14 @@ Since the scope of the app is rather limited, we could get away without using so
 - `react-native-charts-wrapper` tried `coinjar/react-native-wagmi-charts` and considered `victory`
   but `charts-wrapper` seems to be faster and functional for our purposes.
 
+## Screenshots
+
 ![1](https://i.ibb.co/dJBKTZm/1.png)
+
+---
+
 ![2](https://i.ibb.co/fvck9sH/2.png)
+
+---
+
 ![3](https://i.ibb.co/7RRQFz0/3.png)

@@ -12,12 +12,12 @@ import React from 'react';
 import type { Node } from 'react';
 import { SafeAreaView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 
-import AssetsScreen from './src/screens/AssetsScreen';
-import SingleAssetScreen from './src/screens/SingleAssetScreen';
-import FavoriteScreen from './src/screens/FavoriteScreen';
-import { queryClient } from './src/config';
+import AssetsScreen from './screens/AssetsScreen';
+import SingleAssetScreen from './screens/SingleAssetScreen';
+import FavoriteScreen from './screens/FavoriteScreen';
+import { queryClient } from './config';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { FavoriteContextProvider } from './src/contexts/FavoriteContext';
+import { FavoriteContextProvider } from './contexts/FavoriteContext';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

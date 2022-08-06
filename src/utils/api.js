@@ -40,7 +40,7 @@ const fetchAsset = async (assetId) => {
   });
 };
 
-const fetchAssets = async ({ pageParam = 900 }) => {
+const fetchAssets = async ({ pageParam = 1 }) => {
   const limit = 20;
   const url = `https://data.messari.io/api/v2/assets?limit=${limit}&page=${pageParam}&fields=id,slug,symbol,name,metrics/market_data/price_usd`;
   return await fetchUrl(url).then((data) => {

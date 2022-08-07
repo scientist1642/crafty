@@ -5,7 +5,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import AssetItem from './AssetItem';
 import { queryClient } from '../config';
 import { fetchAssets } from '../utils/api';
-import { ScrollView } from 'react-native-gesture-handler';
 import Spinner from './Spinner';
 import HeaderText from './HeaderText';
 import ErrorBox from './ErrorBox';
